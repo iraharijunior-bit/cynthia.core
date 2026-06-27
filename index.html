@@ -14,7 +14,7 @@
     body {
       min-height: 100vh;
       background: #e8f5e9;
-      background: radial-gradient(circle at 30% 30%, #d4edda, #a5d6a7);
+      background: radial-gradient(circle at 30% 30%, #d4edda, #81c784);
       font-family: 'Quicksand', sans-serif;
       display: flex;
       align-items: center;
@@ -55,7 +55,7 @@
 
     /* GATE */
     .glass-panel {
-      background: rgba(232, 245, 233, 0.6);
+      background: rgba(232, 245, 233, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: 56px;
@@ -86,14 +86,27 @@
       font-family: 'Cormorant Garamond', serif;
     }
     .gate-container h1 i { color: #388e3c; margin: 0 12px; filter: drop-shadow(0 0 8px #66bb6a); }
-    .gate-container p { font-weight: 400; font-size: 1.3rem; margin-bottom: 2.8rem; color: #1e3a2a; }
+    .gate-container p { font-weight: 400; font-size: 1.3rem; margin-bottom: 2rem; color: #1e3a2a; }
+    
+    .gate-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #66bb6a;
+      box-shadow: 0 0 40px rgba(46, 125, 50, 0.5);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .gate-photo:hover { transform: scale(1.05) rotate(-3deg); }
+    
     .password-box { width: 100%; margin: 1.2rem 0; }
     .password-input {
       width: 100%;
       padding: 18px 30px;
       border: none;
       border-radius: 60px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(76, 175, 80, 0.5);
       font-size: 1.3rem;
@@ -166,17 +179,37 @@
     }
 
     .main-inner {
-      background: rgba(232, 245, 233, 0.7);
+      background: rgba(232, 245, 233, 0.8);
       backdrop-filter: blur(20px);
       border-radius: 70px;
       padding: 2.8rem 2.5rem;
       border: 1px solid rgba(165, 214, 167, 0.9);
       box-shadow: 0 30px 60px -15px #2e7d32;
+      position: relative;
+      overflow: hidden;
+    }
+    .main-inner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(102, 187, 106, 0.1), transparent 70%);
+      pointer-events: none;
+      animation: shimmer 8s infinite;
+    }
+    @keyframes shimmer {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(10%, 10%); }
+      100% { transform: translate(0, 0); }
     }
 
     .grace-header {
       text-align: center;
       margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
     }
     .grace-header h2 {
       font-size: 4rem;
@@ -198,7 +231,7 @@
 
     /* Letter card */
     .letter-card {
-      background: rgba(232, 245, 233, 0.85);
+      background: rgba(232, 245, 233, 0.9);
       backdrop-filter: blur(16px);
       border: 2px solid #81c784;
       border-radius: 60px;
@@ -208,6 +241,8 @@
       transition: 0.3s;
       text-align: center;
       box-shadow: 0 25px 40px -14px #2e7d32;
+      position: relative;
+      z-index: 2;
     }
     .letter-card:hover {
       transform: scale(1.02);
@@ -232,9 +267,9 @@
       color: #1e4a2a;
     }
 
-    /* Letter display */
+    /* Letter display with photo */
     .letter-paper {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(4px);
       border-radius: 48px;
       padding: 2.5rem;
@@ -242,6 +277,9 @@
       box-shadow: inset 0 0 30px #c8e6c9, 0 25px 40px -15px #2e7d32;
       margin: 30px 0 40px;
       font-family: 'Cormorant Garamond', serif;
+      position: relative;
+      z-index: 2;
+      display: none;
     }
     .letter-content {
       font-size: 1.5rem;
@@ -250,8 +288,26 @@
       white-space: pre-line;
       font-weight: 500;
     }
+    .letter-photo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0 2rem;
+    }
+    .letter-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #66bb6a;
+      box-shadow: 0 0 50px rgba(46, 125, 50, 0.4);
+      transition: transform 0.3s;
+    }
+    .letter-photo:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 0 70px rgba(46, 125, 50, 0.6);
+    }
 
-    /* POSTER: girl of the day — Cynthia */
+    /* POSTER */
     .poster-grace {
       display: flex;
       flex-direction: column;
@@ -266,6 +322,8 @@
       text-align: center;
       transform: scale(1);
       transition: 0.3s;
+      position: relative;
+      z-index: 2;
     }
     .poster-grace:hover {
       transform: scale(1.02);
@@ -313,9 +371,10 @@
       font-weight: 500;
       margin-top: 30px;
       font-size: 1.2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    /* interactive glow */
     .glow-pulse {
       animation: pulseGlow 2s infinite;
     }
@@ -331,6 +390,21 @@
       font-size: 1.1rem;
       color: #1e4a2a;
       opacity: 0.8;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* confetti-like sparkles */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      animation: sparkleFade 1.5s ease-out forwards;
+      z-index: 50;
+    }
+    @keyframes sparkleFade {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
     }
   </style>
 </head>
@@ -346,6 +420,7 @@
   <div id="gatePanel" class="glass-panel gate-container">
     <h1><i class="fas fa-heart"></i> MIR JUNIOR <i class="fas fa-heart"></i></h1>
     <p>✨ for Cynthia ✨</p>
+    <img src="cynthia.jpg" alt="Cynthia" class="gate-photo" id="gatePhoto">
     <div class="password-box">
       <input type="password" id="passwordInput" class="password-input" placeholder="• • • • • •" autofocus>
     </div>
@@ -368,12 +443,15 @@
         <p>touch to open the words..!</p>
       </div>
 
-      <!-- Letter display -->
-      <div id="letterDisplay" class="letter-paper" style="display: none;">
+      <!-- Letter display with photo -->
+      <div id="letterDisplay" class="letter-paper">
+        <div class="letter-photo-wrapper">
+          <img src="cynthia.jpg" alt="Cynthia" class="letter-photo" id="letterPhoto">
+        </div>
         <div class="letter-content" id="letterText"></div>
       </div>
 
-      <!-- POSTER: girl of the day — Cynthia -->
+      <!-- POSTER -->
       <div class="poster-grace" id="posterGrace">
         <div class="poster-star"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
         <div class="poster-title">girl of the day</div>
@@ -412,6 +490,9 @@
       const floatingContainer = document.getElementById('floatingContainer');
       const canvas = document.getElementById('heartCanvas');
       const ctx = canvas.getContext('2d');
+      const letterDisplay = document.getElementById('letterDisplay');
+      const letterText = document.getElementById('letterText');
+      const showLetterCard = document.getElementById('showLetterCard');
 
       let musicStarted = false;
       let floatInterval;
@@ -537,6 +618,24 @@
         bgMusic.play().catch(e => console.log('Music play prevented', e));
       }
 
+      // ---- sparkle effect ----
+      function createSparkles(x, y, count = 20) {
+        const emojis = ['💚', '✨', '🌟', '💫', '🌸', '🌿'];
+        for (let i = 0; i < count; i++) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          sparkle.style.left = x + 'px';
+          sparkle.style.top = y + 'px';
+          const angle = Math.random() * 2 * Math.PI;
+          const distance = 50 + Math.random() * 150;
+          sparkle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+          sparkle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1500);
+        }
+      }
+
       // ---- grant access ----
       function grantAccess() {
         if (!musicStarted) {
@@ -550,9 +649,15 @@
         startHeartDrawing(() => {
           startFloating();
           gracePage.style.display = 'block';
-          body.style.background = 'radial-gradient(circle at 20% 30%, #e8f5e9, #a5d6a7)';
-          // extra green glow
+          body.style.background = 'radial-gradient(circle at 20% 30%, #e8f5e9, #81c784)';
           document.querySelector('.main-inner').classList.add('glow-pulse');
+          
+          // Trigger sparkles on poster
+          setTimeout(() => {
+            const poster = document.getElementById('posterGrace');
+            const rect = poster.getBoundingClientRect();
+            createSparkles(rect.left + rect.width/2, rect.top + rect.height/2, 30);
+          }, 500);
         });
       }
 
@@ -561,14 +666,33 @@
         const entered = passwordInput.value.trim();
         if (entered === SECRET_PASSWORD) {
           errorMsg.innerHTML = '';
+          // sparkle on success
+          const rect = enterBtn.getBoundingClientRect();
+          createSparkles(rect.left + rect.width/2, rect.top + rect.height/2, 25);
           grantAccess();
         } else {
           errorMsg.innerHTML = '✘ only "mirlovesyoucynthia" opens the heart ✘';
           passwordInput.style.borderColor = '#c62828';
           passwordInput.value = '';
           passwordInput.focus();
+          // shake animation
+          passwordInput.style.animation = 'none';
+          setTimeout(() => {
+            passwordInput.style.animation = 'shake 0.3s';
+          }, 10);
         }
       }
+
+      // Add shake keyframes
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+        }
+      `;
+      document.head.appendChild(style);
 
       enterBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -587,7 +711,7 @@
 
       window.addEventListener('load', () => passwordInput.focus());
 
-      // ---- LETTER CONTENT (updated, no Valentine, includes nickname) ----
+      // ---- LETTER CONTENT ----
       const fullLetter = `Dear Cynthia, ❤️
 
 Today is a special day for me because today we started loving each other. I am really happy, and I thank God that you are now a special part of my life.
@@ -609,44 +733,69 @@ Take care of yourself, keep smiling, and never forget that you are special to me
 With love,
 Mir ❤️`;
 
-      const showLetterCard = document.getElementById('showLetterCard');
-      const letterDisplay = document.getElementById('letterDisplay');
-      const letterText = document.getElementById('letterText');
       letterText.innerText = fullLetter;
 
       showLetterCard.addEventListener('click', () => {
         if (letterDisplay.style.display === 'none' || letterDisplay.style.display === '') {
           letterDisplay.style.display = 'block';
+          // sparkle effect when opening letter
+          const rect = showLetterCard.getBoundingClientRect();
+          createSparkles(rect.left + rect.width/2, rect.top + rect.height/2, 20);
           letterDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          // Add a little animation to the photo
+          const photo = document.getElementById('letterPhoto');
+          photo.style.animation = 'none';
+          setTimeout(() => {
+            photo.style.animation = 'popIn 0.5s ease';
+          }, 10);
         } else {
           letterDisplay.style.display = 'none';
         }
       });
 
-      // ---- extra interactivity: poster click effect ----
+      // Add popIn animation
+      const style2 = document.createElement('style');
+      style2.textContent = `
+        @keyframes popIn {
+          0% { transform: scale(0); opacity: 0; }
+          80% { transform: scale(1.1); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+      `;
+      document.head.appendChild(style2);
+
+      // ---- extra interactivity: poster click ----
       const poster = document.getElementById('posterGrace');
-      poster.addEventListener('click', function() {
+      poster.addEventListener('click', function(e) {
         this.style.transform = 'scale(0.97)';
         setTimeout(() => { this.style.transform = 'scale(1.02)'; }, 150);
         setTimeout(() => { this.style.transform = 'scale(1)'; }, 300);
-        // sparkle effect (console love)
+        const rect = this.getBoundingClientRect();
+        createSparkles(e.clientX, e.clientY, 25);
         console.log('💚 You touched the poster, Babe! 💚');
       });
 
-      // ---- extra: double-click on header to toggle green glow ----
+      // ---- double-click on header to toggle glow ----
       const header = document.querySelector('.grace-header h2');
       if (header) {
         header.addEventListener('dblclick', function() {
           const inner = document.querySelector('.main-inner');
           inner.classList.toggle('glow-pulse');
+          const rect = this.getBoundingClientRect();
+          createSparkles(rect.left + rect.width/2, rect.top + rect.height/2, 30);
         });
       }
 
-      // ---- extra: key hint (show password hint on ESC) ----
+      // ---- ESC hint ----
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && gate.style.display !== 'none') {
           errorMsg.innerHTML = '💚 hint: mirlovesyoucynthia';
         }
+      });
+
+      // ---- auto-focus with click anywhere on gate ----
+      gate.addEventListener('click', () => {
+        passwordInput.focus();
       });
 
     })();
